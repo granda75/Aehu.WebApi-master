@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace Aehu.WebApi.Controllers
 {
@@ -19,28 +20,29 @@ namespace Aehu.WebApi.Controllers
         {
             //await CreateJsonFile("https://jsonplaceholder.typicode.com/users", "users.json");
 
-            string fileName = "posts.json";
-            string postsUrl = "https://jsonplaceholder.typicode.com/posts";
-            List<Post> posts = null;
+            //string fileName = "posts.json";
+            //string postsUrl = "https://jsonplaceholder.typicode.com/posts";
+            //List<Post> posts = null;
 
-            using (var httpClient = new HttpClient())
-            {
-                using (var response = await httpClient.GetAsync(postsUrl))
-                {
-                    string currentPath = Directory.GetCurrentDirectory();
-                    string jsonFolderPath = Path.Combine(currentPath, "JsonFiles\\");
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    posts = JsonConvert.DeserializeObject<List<Post>>(apiResponse);
-                    string imgUrl = "https://picsum.photos/400/400";
-                    foreach (Post post in posts)
-                    {
-                        string imageUrl =  await DownloadFile(imgUrl, post.id);
-                        post.imageUrl = imageUrl;
-                    }
-                    //JsonConvert.Se
-                    //System.IO.File.WriteAllText(jsonFolderPath + fileName, apiResponse);
-                }
-            }
+            //using (var httpClient = new HttpClient())
+            //{
+            //    using (var response = await httpClient.GetAsync(postsUrl))
+            //    {
+            //        string currentPath = Directory.GetCurrentDirectory();
+            //        string jsonFolderPath = Path.Combine(currentPath, "JsonFiles\\");
+            //        string apiResponse = await response.Content.ReadAsStringAsync();
+            //        posts = JsonConvert.DeserializeObject<List<Post>>(apiResponse);
+            //        string imgUrl = "https://picsum.photos/400/400";
+            //        foreach (Post post in posts)
+            //        {
+            //            string imageUrl = await DownloadFile(imgUrl, post.id);
+            //            post.imageUrl = "http://localhost/images/" + imageUrl;
+            //        }
+
+            //        var postsJson = System.Text.Json.JsonSerializer.Serialize<List<Post>>(posts);
+            //        System.IO.File.WriteAllText(jsonFolderPath + fileName, postsJson);
+            //    }
+            //}
 
             //await CreateJsonFile("https://jsonplaceholder.typicode.com/posts", "posts.json");
             //await CreateJsonFile("https://jsonplaceholder.typicode.com/comments", "comments.json");
@@ -85,30 +87,14 @@ namespace Aehu.WebApi.Controllers
             //3. Thumbnail
             //4. number of comments
 
-            //groups = (from g in db.Groups
-            //          join gu in db.GroupUsers on g.GroupId equals gu.GroupId
-            //          where g.Active == true && gu.UserId == userId
-            //          select new Group
-            //          {
-            //              GroupId = g.GroupId,
-            //              Name = g.Name,
-            //              CreatedOn = g.CreatedOn,
-            //              ContactCount = (from c in db.Contacts where c.OwnerGroupId == g.GroupId select c).Count(),
-            //              MemberCount = (from guu in db.GroupUsers
-            //                             where guu.GroupId == g.GroupId
-            //                             join u in db.Users on guu.UserId equals u.UserId
-            //                             where u.Active == true
-            //                             select gu).Count()
-            //          }).ToList<Group>();
-
           //  join comment in lstComments on post.id equals comment.postId
-
            var posts = from post in lstPosts
                     join user in lstUsers on post.userId equals user.id
                     select new PostData
                     {
                         Id     = post.id,
                         Title  = post.title,
+                        Picture = post.imageUrl,
                         Author = user.name,
                         CommentsCount = (from c in lstComments where c.postId == post.id select c).Count()
                     };
