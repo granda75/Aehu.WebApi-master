@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+
 
 namespace Aehu.WebApi.Models
 {
@@ -13,6 +11,8 @@ namespace Aehu.WebApi.Models
         public string body { get; set; }
 
         public string imageUrl { get; set; }
+
+        
     }
 
 }

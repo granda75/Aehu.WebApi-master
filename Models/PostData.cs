@@ -1,5 +1,7 @@
 ﻿
 
+using System.Collections.Generic;
+
 namespace Aehu.WebApi.Models
 {
     public class PostData
@@ -10,5 +12,7 @@ namespace Aehu.WebApi.Models
 
         public string Picture { get; set; }
         public int CommentsCount { get; set; }
+
+        public List<Comment> Comments { get; set; }
     }
 }
