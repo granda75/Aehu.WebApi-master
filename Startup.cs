@@ -1,3 +1,4 @@
+using Aehu.BL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +30,8 @@ namespace Aehu.WebApi
             services.AddControllers();
 
             services.AddMemoryCache();
+            //services.AddScoped<PostsBL>();
+            services.AddScoped<IPostsBL, PostsBL>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

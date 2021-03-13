@@ -11,6 +11,12 @@
 
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Aehu.BL\Aehu.BL.csproj" />
+    <ProjectReference Include="..\Aehu.Entities\Aehu.Entities.csproj" />
   </ItemGroup>
 
 
