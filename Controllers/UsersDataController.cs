@@ -103,8 +103,6 @@ namespace Aehu.WebApi.Controllers
             return false;
         }
 
-
-
         [HttpDelete("DeletePost")]
         public bool DeletePost(int postId)
         {
@@ -134,11 +132,6 @@ namespace Aehu.WebApi.Controllers
         {
             return await _bl.GetAllPosts();
         }
-
-        #endregion
-
-        #region Private methods
-
 
         #endregion
 
